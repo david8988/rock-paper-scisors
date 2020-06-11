@@ -1,14 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+  <title>piedra papel o tijera</title>
   <meta charset="UTF-8"/>
 </head>
 <body>
-    pagina de prueba
+    piedra papel o tijeraaaaaaaaaaaaaaaa
   <script>
     // Your JavaScript goes here!
     console.log("Hello, World!")
+
+    function computerPlay(){
+      let arr=["piedra","papel","tijera"];
+      return arr[Math.floor(Math.random()*3)];
+    }
+
+    let computerSelection=computerPlay();
+    //console.log(computerSelection);
+    let playerSelection//=prompt("escribe tu eleccion..piedra,papel o tijera");
+
+    function playRound(humanChoice,computerChoice){
+      let lowerCaseHumanChoice=humanChoice.toLowerCase();
+      //console.log(playerSelection)
+      let result="";
+      if(lowerCaseHumanChoice==computerChoice){
+        result="empate";
+        return result;
+      }else if(lowerCaseHumanChoice=="piedra"){
+        
+           if(computerChoice=="papel"){
+             result="gana la computadora, papel>piedra";
+             }else{
+               result="ganaste, piedra>tijera";
+             }
+                       
+             return result;
+      }
+      else if(lowerCaseHumanChoice=="tijera"){
+        
+        if(computerChoice=="piedra"){
+          result="gana la computadora, piedra>tijera";
+          }else{
+            result="ganaste, tijera>papel";
+          }
+        return result;
+         
+     
+      }
+      else if(lowerCaseHumanChoice=="papel"){
+        
+        if(computerChoice=="tijera"){
+          result="gana la computadora, tijera>papel";
+          }else{
+            result="ganaste, papel>piedra";
+          }
+        return result;
+         
+     
+      }
+
+      
+      
+    }
+
+    
+    
+    function game(){
+      let humanScore=0;
+      let computerScore=0;
+      let roundResult="";
+      let winRegex=/ganaste/;
+      let loseRegex=/computadora/;
+      let gameResult="";
+      for(let i=1;i<=5;i++){
+        //console.log(i);
+        computerSelection=computerPlay();
+        playerSelection=prompt("escribe tu eleccion..piedra,papel o tijera");
+        roundResult=playRound(playerSelection,computerSelection);
+        console.log(roundResult);
+        if(winRegex.test(roundResult)){
+          humanScore++;
+        }else if(loseRegex.test(roundResult)){
+          computerScore++;
+        }
+
+      }
+      if(humanScore<computerScore){
+        gameResult="perdiste el juego";
+      }else if(humanScore>computerScore){
+        gameResult="ganaste el juego";
+      }else{
+        gameResult="fue un empate";
+      }
+
+      
+      return ` ${gameResult}, tu puntaje:${humanScore}, computadora:${computerScore}`;
+    }
+
+    console.log(game());
+
   </script>
 </body>
 </html>
